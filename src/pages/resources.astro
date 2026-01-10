@@ -1,0 +1,61 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { resources } from "../data/resources";
+
+const title = "资源导航 | Rake's Blog";
+---
+
+<Layout title={title}>
+  <Header />
+  <main id="main-content" class="mx-auto max-w-4xl px-4 py-12">
+    <section class="mb-12 text-center">
+      <h1 class="text-4xl font-bold text-skin-accent mb-4">精选资源站</h1>
+      <p class="opacity-80">整理了一些我常用且推荐的工具与网站</p>
+    </section>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {resources.map(item => (
+        <a 
+          href={item.link} 
+          target="_blank" 
+          class="group relative block p-6 bg-skin-card border border-skin-line rounded-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-skin-accent"
+        >
+          <div class="flex flex-col h-full justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-3">
+                <span class="text-xs font-medium px-2 py-1 rounded bg-skin-accent/10 text-skin-accent uppercase tracking-wider">
+                  {item.category}
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-0 group-hover:opacity-100 transition-opacity text-skin-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="box-arrow-up-right" />
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </div>
+              <h2 class="text-xl font-bold mb-2 group-hover:text-skin-accent transition-colors">
+                {item.name}
+              </h2>
+              <p class="text-sm opacity-70 line-clamp-2">
+                {item.description}
+              </p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-skin-line/50 text-xs italic opacity-50">
+              点击访问 →
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  /* 这里可以添加一些 AstroPaper 专有的皮肤变量适配 */
+  #main-content {
+    @apply min-h-[calc(100vh-16rem)];
+  }
+</style>
